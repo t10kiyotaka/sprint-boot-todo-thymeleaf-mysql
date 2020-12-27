@@ -5,6 +5,9 @@
   <title>Title</title>
 </head>
 <body>
-  <div>index!e1</div>
+  <h1>TODO</h1>
+  <div th:each="todo : ${todoList}">
+    <span th:text="${todo.getContent()}"></span>
+  </div>
 </body>
 </html>
