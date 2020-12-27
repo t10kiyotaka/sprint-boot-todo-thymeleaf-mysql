@@ -7,7 +7,9 @@
 <body>
   <h1>TODO</h1>
   <div th:each="todo : ${todoList}">
-    <span th:text="${todo.getContent()}"></span>
+    id: <span th:text="${todo.getId()}"></span>
+    content: <span th:text="${todo.getContent()}"></span>
+    isDone: <span th:text="${todo.isDone()}"></span>
   </div>
 </body>
 </html>

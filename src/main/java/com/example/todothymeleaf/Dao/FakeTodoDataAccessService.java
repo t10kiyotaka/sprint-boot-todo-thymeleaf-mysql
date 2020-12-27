@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public class FakeTodoDataAccessService implements TodoDao {
+
     private static List<Todo> DB = new ArrayList<>();
 
     @Override
@@ -19,12 +20,15 @@ public class FakeTodoDataAccessService implements TodoDao {
 
     @Override
     public int updateTodo(Todo newTodo) {
-        int index = DB.indexOf(newTodo);
-        if(index >= 0) {
-            DB.set(index, newTodo);
-            return 1;
-        }
-        return 0;
+        return findById(newTodo.getId()).map(todo -> {
+            int index = DB.indexOf(todo);
+            if(index >= 0) {
+                DB.set(index, newTodo);
+                return 1;
+            } else {
+                return 0;
+            }
+        }).orElse(0);
     }
 
     @Override
