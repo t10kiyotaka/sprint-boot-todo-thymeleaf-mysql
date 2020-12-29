@@ -3,6 +3,7 @@ package com.example.todothymeleaf.service;
 import com.example.todothymeleaf.Dao.TodoDao;
 import com.example.todothymeleaf.model.Todo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class TodoService {
     private final TodoDao todoDao;
 
     @Autowired
-    public TodoService(TodoDao todoDao) {
+    public TodoService(@Qualifier("postgres") TodoDao todoDao) {
         this.todoDao = todoDao;
     }
 

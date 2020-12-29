@@ -22,4 +22,9 @@ public class Todo {
     public boolean isDone() {
         return isDone;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Todo(id: %s, content: %s, isDone: %s)", id, content, isDone);
+    }
 }
