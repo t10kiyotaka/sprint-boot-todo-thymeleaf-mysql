@@ -18,15 +18,13 @@
 
   <hr>
 
-  <div th:each="todo : ${todoList}">
+  <div th:each="todo, rowStat : ${todoList}">
     <form autocomplete="off" action="#" th:action="@{/{id}/update(id=${todo.getId()})}" th:object="${todo}"
       method="post">
-      id: <span th:text="${todo.getId()}"></span>
-      id: <input type="number" th:value="${todo.getId()}" th:field="*{id}"/>
-      content: <span th:text="${todo.getContent()}"></span>
-      content: <input type="text" th:value="${todo.getContent()}" th:field="*{content}">
-      isDone: <span th:text="${todo.isDone()}"></span>
-      isDone: <input type="checkbox" th:value="${todo.isDone()}" th:field="*{isDone}"
+      id: <input type="number" th:value="${todo.getId()}" id="id" name="id"/>
+      content: <input type="text" th:value="${todo.getContent()}" id="content" name="content" />
+      isDone: <label th:for="${#ids.next('isDone')}" th:text="${todo.isDone()}">isDone:</label>
+      <input type="checkbox" th:id="isDone+${rowStat.count}" name="isDone"
                      th:checked="${todo.isDone()}">
       <button type="submit">Update</button>
       <button type="button" th:attr="onclick=|deleteTodo('${todo.getId()}')|">Delete</button>
