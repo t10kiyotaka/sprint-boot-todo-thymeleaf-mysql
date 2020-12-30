@@ -3,13 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
   <h1>TODO</h1>
+
+  <form autocomplete="off" action="#" th:action="@{/}" th:object="${todo}" method="post">
+    id: <input type="number" th:field="*{id}" />
+    <br>
+    content: <input type="text" th:field="*{content}" />
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <hr>
+
   <div th:each="todo : ${todoList}">
-    id: <span th:text="${todo.getId()}"></span>
-    content: <span th:text="${todo.getContent()}"></span>
-    isDone: <span th:text="${todo.isDone()}"></span>
+    <form autocomplete="off" action="#" th:action="@{/{id}/update(id=${todo.getId()})}" th:object="${todo}"
+      method="post">
+      id: <span th:text="${todo.getId()}"></span>
+      id: <input type="number" th:value="${todo.getId()}" th:field="*{id}"/>
+      content: <span th:text="${todo.getContent()}"></span>
+      content: <input type="text" th:value="${todo.getContent()}" th:field="*{content}">
+      isDone: <span th:text="${todo.isDone()}"></span>
+      isDone: <input type="checkbox" th:value="${todo.isDone()}" th:field="*{isDone}"
+                     th:checked="${todo.isDone()}">
+      <button type="submit">Update</button>
+      <button type="button" th:attr="onclick=|deleteTodo('${todo.getId()}')|">Delete</button>
+    </form>
   </div>
+
+  <script>
+      function deleteTodo(id) {
+          $.ajax({
+              url: '/' + id + '/delete',
+              type: 'POST',
+              success: function (result) {
+                  console.log('success')
+                  window.location.replace('/');
+              },
+              error: function (result) {
+                  console.log('error')
+                  alert(result);
+              }
+          })
+      }
+  </script>
 </body>
 </html>

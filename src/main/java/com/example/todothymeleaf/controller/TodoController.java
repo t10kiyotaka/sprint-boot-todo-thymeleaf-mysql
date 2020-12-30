@@ -24,7 +24,7 @@ public class TodoController {
     }
 
     @GetMapping("/")
-    public String index(Model model){
+    public String index(Todo todo, BindingResult result, Model model){
         model.addAttribute("todoList", todoService.selectAllTodo());
         return "index";
     }
@@ -46,18 +46,18 @@ public class TodoController {
     }
 
     @PostMapping("/")
-    public String addTodo(@RequestBody Todo todo) {
+    public String addTodo(Todo todo, BindingResult result, Model model) {
         todoService.addTodo(todo);
         return "redirect:/";
     }
 
-    @PutMapping("/")
-    public String updateTodo(@RequestBody Todo todo) {
+    @PostMapping("/{id}/update")
+    public String updateTodo(Todo todo, BindingResult result, Model model) {
         todoService.update(todo);
         return "redirect:/";
     }
 
-    @DeleteMapping("/{id}")
+    @PostMapping("/{id}/delete")
     public String deleteTodo(@PathVariable int id) {
         todoService.deleteTodo(id);
         return "redirect:/";
