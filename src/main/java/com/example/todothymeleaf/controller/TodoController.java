@@ -29,22 +29,6 @@ public class TodoController {
         return "index";
     }
 
-    /**
-     * Make 3 tasks (for test use)
-     */
-    @PostMapping("/init")
-    public String initTodo() {
-        Todo[] todos = {
-            new Todo(1, "Buy milk", false),
-            new Todo(2, "Buy bread", false),
-            new Todo(3, "Run", false)
-        };
-        for(Todo todo : todos) {
-            todoService.addTodo(todo);
-        }
-        return "redirect:/";
-    }
-
     @PostMapping("/")
     public String addTodo(Todo todo, BindingResult result, Model model) {
         todoService.addTodo(todo);

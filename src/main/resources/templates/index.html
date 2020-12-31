@@ -9,8 +9,6 @@
   <h1>TODO</h1>
 
   <form autocomplete="off" action="#" th:action="@{/}" th:object="${todo}" method="post">
-    id: <input type="number" th:field="*{id}" />
-    <br>
     content: <input type="text" th:field="*{content}" />
     <br>
     <button type="submit">Submit</button>
@@ -21,7 +19,7 @@
   <div th:each="todo, rowStat : ${todoList}">
     <form autocomplete="off" action="#" th:action="@{/{id}/update(id=${todo.getId()})}" th:object="${todo}"
       method="post">
-      id: <input type="number" th:value="${todo.getId()}" id="id" name="id"/>
+      id: <span th:text="${todo.getId()}"></span>
       content: <input type="text" th:value="${todo.getContent()}" id="content" name="content" />
       isDone: <label th:for="${#ids.next('isDone')}" th:text="${todo.isDone()}">isDone:</label>
       <input type="checkbox" th:id="isDone+${rowStat.count}" name="isDone"
