@@ -8,8 +8,10 @@
 ```
 docker-compose up -d
 ```
-Create DB
+## Create DB
 ```
+docker exec -it todo-thymeleaf_db_1 bash
+mysql -uroot -p
 create database demodb;
 ```
 
