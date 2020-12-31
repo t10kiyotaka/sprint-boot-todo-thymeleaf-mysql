@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository("postgres")
+@Repository("mysql")
 public class TodoDataAccessService implements TodoDao {
     final private JdbcTemplate jdbcTemplate;
 
